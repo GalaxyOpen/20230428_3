@@ -1,12 +1,7 @@
 
-<%--
-  Created by IntelliJ IDEA.
-  User: user
-  Date: 2023-04-28
-  Time: 오후 2:04
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+
 <html>
 <head>
     <title>Title</title>
@@ -21,7 +16,7 @@
 <div id="section">
     <form action="/save" method="post">
         <input type="text" id="member_Email" name="memberEmail" placeholder="이메일" onblur="email_check()"> <br>
-        <h2 id="email_text"></h2>
+        <p id="email_text"></p>
         <input type="text" name="memberPassword" placeholder="비밀번호"> <br>
         <input type="text" name="memberName" placeholder="이름"> <br>
         <input type="text" name="memberBirth" placeholder="생년월일(YYYYMMDD)"> <br>
@@ -34,17 +29,18 @@
 </body>
 <script>
     const email_check = () => {
-        const memberEmail = document.getElementById("member_Email").value;
+        const checkEmail = document.getElementById("member_Email").value;
         const alert_message = document.getElementById("email_text");
         $.ajax({
             type: "post",
-            url: "email_check",
+            url: "/email_check",
             data: {
-                "email_check": memberEmail
+                "email_check": checkEmail
             },
-            success: function(res) {
-                    // console.log("요청성공",res)
-                    // console.log(res.memberEmail)
+            success: function() {
+                     // console.log("요청성공",res)
+                     // console.log(res.memberEmail)
+
                     alert_message.innerHTML="사용할 수 있는 이메일 주소입니다.";
                     alert_message.style.color ="green";
             },

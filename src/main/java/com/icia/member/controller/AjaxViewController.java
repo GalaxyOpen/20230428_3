@@ -54,10 +54,8 @@ public class AjaxViewController {
     public String ajaxView10(){
         return "ajax10";
     }
-    @GetMapping("/email_check")
-    public String email_check(){
-        return "email_check";
-    }
+
+
 
 
 

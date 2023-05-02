@@ -3,6 +3,8 @@ package com.icia.member.controller;
 import com.icia.member.dto.MemberDTO;
 import com.icia.member.service.MemberService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -100,5 +102,27 @@ public String login(@ModelAttribute MemberDTO memberDTO, Model model, HttpSessio
     public String delete(@RequestParam("id")Long id) {
     memberService.delete(id);
     return "redirect:/members";
+    }
+
+    @PostMapping("/email_check")
+    public ResponseEntity email_check(@RequestParam String email_check){
+        System.out.println("email_check = " + email_check);
+        MemberDTO memberDTO=memberService.findByMemberEmail(email_check);
+        if(memberDTO == null) {
+            return new ResponseEntity<>(HttpStatus.OK);
+        }else{
+            return new ResponseEntity<>(HttpStatus.CONFLICT);
+        }
+    }
+
+    @GetMapping("/detail_ajax")
+    public ResponseEntity detailAjax(@RequestParam("id") Long id) {
+        System.out.println("id = " + id);
+        MemberDTO memberDTO = memberService.findById(id);
+        if (memberDTO != null) {
+            return new ResponseEntity<>(memberDTO, HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
 }

@@ -78,15 +78,6 @@ public class AjaxController {
         resultMap.put("memberList", memberDTOList);
         return new ResponseEntity<>(resultMap, HttpStatus.OK);
     }
-    @PostMapping("/email_check")
-    public ResponseEntity email_check(@ModelAttribute String email, Model model){
-        MemberDTO memberDTO = memberService.findByMemberEmail(email);
-        model.addAttribute("member",memberDTO);
-        if(memberDTO == null) {
-            return new ResponseEntity<>(memberDTO, HttpStatus.OK);
-        }else{
-            return new ResponseEntity<>(memberDTO, HttpStatus.CONFLICT);
-        }
-    }
+
 
 }

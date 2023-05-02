@@ -11,6 +11,7 @@
 <head>
     <title>Title</title>
     <link rel="stylesheet" href="../resources/css/main.css">
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 </head>
 <body>
 <%@include file="./component/header.jsp"%>
@@ -29,7 +30,7 @@
         </tr>
         <c:forEach items="${memberList}" var ="member">
             <tr>
-                <td>${member.id}</td>
+                <td onclick="member_detail_ajax('${member.id}')">${member.id}</td>
                 <td>${member.memberEmail}</td>
                 <td>${member.memberName}</td>
                 <td>${member.memberBirth}</td>
@@ -40,6 +41,7 @@
             </tr>
         </c:forEach>
     </table>
+    <div id="detail-area"></div>
 </div>
 <%@include file="./component/footer.jsp"%>
 </body>
@@ -54,5 +56,32 @@
         location.href="/delete?id="+id;
 
     }
+    const member_detail_ajax = (id) => {
+        const resultArea = document.getElementById("detail-area")
+        $.ajax({
+            type: "get",
+            url: "/detail_ajax",
+            data: {
+                "id": id
+            },
+            success: function(res) {
+                    let result = "<table>";
+                    result += "<tr>";
+                    result += "<td>" + res.memberEmail + "</td>";
+                    result += "<td>" + res.memberName + "</td>";
+                    result += "<td>" + res.memberBirth + "</td>";
+                    result += "<td>" + res.memberMobile + "</td>";
+                    result += "</tr>";
+                    result += "</table>";
+                    resultArea.innerHTML = result;
+            },
+            error: function(){
+                alert("일치하는 정보가 없습니다")
+            }
+        })
+    }
+
+
+
 </script>
 </html>
