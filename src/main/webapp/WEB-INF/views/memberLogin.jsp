@@ -27,4 +27,5 @@
 
 <%@include file="./component/footer.jsp"%>
 </body>
+
 </html>

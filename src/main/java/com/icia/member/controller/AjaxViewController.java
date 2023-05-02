@@ -1,8 +1,12 @@
 package com.icia.member.controller;
 
+import com.icia.member.dto.MemberDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 @Controller
 public class AjaxViewController {
@@ -33,4 +37,28 @@ public class AjaxViewController {
     public String ajaxView06(){
         return "ajax06";
     }
+    @GetMapping("/ajax-view07")
+    public String ajaxView07(){
+
+        return "ajax07";
+    }
+    @GetMapping("/ajax-view08")
+    public String ajaxView08(){
+        return "ajax08";
+    }
+    @GetMapping("/ajax-view09")
+    public String ajaxView09(){
+        return "ajax09";
+    }
+    @GetMapping("/ajax-view10")
+    public String ajaxView10(){
+        return "ajax10";
+    }
+    @GetMapping("/email_check")
+    public String email_check(){
+        return "email_check";
+    }
+
+
+
 }
